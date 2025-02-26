@@ -1,20 +1,11 @@
 package com.mbranches.springboot_devdojo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Anime {
+    private long id;
     private String name;
-
-    public Anime(String name) {
-        this.name = name;
-    }
-
-    public Anime() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
