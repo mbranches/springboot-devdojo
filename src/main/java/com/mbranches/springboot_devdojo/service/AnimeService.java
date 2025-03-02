@@ -1,5 +1,6 @@
 package com.mbranches.springboot_devdojo.service;
 
+import com.mbranches.springboot_devdojo.exception.BadRequestException;
 import com.mbranches.springboot_devdojo.mapper.AnimeMapper;
 import com.mbranches.springboot_devdojo.model.Anime;
 import com.mbranches.springboot_devdojo.repository.AnimeRepository;
@@ -27,7 +28,7 @@ public class AnimeService {
 
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
+                .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
