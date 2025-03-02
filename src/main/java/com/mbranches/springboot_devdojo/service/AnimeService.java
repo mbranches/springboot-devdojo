@@ -1,5 +1,6 @@
 package com.mbranches.springboot_devdojo.service;
 
+import com.mbranches.springboot_devdojo.mapper.AnimeMapper;
 import com.mbranches.springboot_devdojo.model.Anime;
 import com.mbranches.springboot_devdojo.repository.AnimeRepository;
 import com.mbranches.springboot_devdojo.requests.AnimePostRequestBody;
@@ -25,8 +26,7 @@ public class AnimeService {
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        Anime anime = Anime.builder().name(animePostRequestBody.getName()).build();
-        return animeRepository.save(anime);
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void delete(long id) {
@@ -34,13 +34,8 @@ public class AnimeService {
     }
 
     public void replace(AnimePutRequestBody animePutRequestBody) {
-        Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-
-        Anime anime = Anime.builder()
-                .name(animePutRequestBody.getName())
-                .id(animePutRequestBody.getId())
-                .build();
-
-        animeRepository.save(anime);
+        findByIdOrThrowBadRequestException(animePutRequestBody.getId());
+        
+        animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePutRequestBody));
     }
 }
