@@ -20,6 +20,11 @@ public class AnimeService {
     public List<Anime> listAll() {
         return animeRepository.findAll();
     }
+
+    public List<Anime> findByName(String name) {
+        return animeRepository.findByName(name);
+    }
+
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not Found"));
@@ -35,7 +40,7 @@ public class AnimeService {
 
     public void replace(AnimePutRequestBody animePutRequestBody) {
         findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-        
+
         animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePutRequestBody));
     }
 }
