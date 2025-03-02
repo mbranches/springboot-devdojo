@@ -34,7 +34,7 @@ public class AnimeService {
     }
 
     @Transactional //por padrao exceptions checked não dao rollback
-    public Anime save(AnimePostRequestBody animePostRequestBody) throws Exception {
+    public Anime save(AnimePostRequestBody animePostRequestBody) {
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
