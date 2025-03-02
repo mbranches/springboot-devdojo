@@ -6,6 +6,8 @@ import com.mbranches.springboot_devdojo.model.Anime;
 import com.mbranches.springboot_devdojo.repository.AnimeRepository;
 import com.mbranches.springboot_devdojo.requests.AnimePostRequestBody;
 import com.mbranches.springboot_devdojo.requests.AnimePutRequestBody;
+import jakarta.transaction.RollbackException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,8 @@ public class AnimeService {
                 .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
 
-    public Anime save(AnimePostRequestBody animePostRequestBody) {
+    @Transactional //por padrao exceptions checked não dao rollback
+    public Anime save(AnimePostRequestBody animePostRequestBody) throws Exception {
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
