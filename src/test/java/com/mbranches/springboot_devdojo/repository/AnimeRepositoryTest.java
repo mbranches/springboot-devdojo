@@ -1,6 +1,7 @@
 package com.mbranches.springboot_devdojo.repository;
 
 import com.mbranches.springboot_devdojo.model.Anime;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -90,6 +91,19 @@ class AnimeRepositoryTest {
 
             Assertions.assertThat(animes).isEmpty();
         }
+
+    @Test
+    @DisplayName("Save throw ConstraintViolationException when name is empty")
+    void save_ThrowConstraintViolationException_WhenNameIsEmpty() {
+        Anime animeToBeSaved = new Anime();
+
+//        Assertions.assertThatThrownBy(() -> this.animeRepository.save(animeToBeSaved))
+//                .isInstanceOf(ConstraintViolationException.class);
+
+        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+                .isThrownBy(() -> this.animeRepository.save(animeToBeSaved))
+                .withMessageContaining("the anime name cannot be empty");
+    }
 
     private Anime createAnime() {
         return Anime.builder()
