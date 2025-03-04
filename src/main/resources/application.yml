@@ -8,11 +8,27 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  spring:
+    h2:
+      console:
+        enabled: true
+    jpa:
+      defer-datasource-initialization: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+          strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+          hibernate:
+            format_sql: true
+
+
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect  # Defina o dialecto correto para MySQL 8
 
 logging:
   level:
