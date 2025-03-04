@@ -45,11 +45,11 @@ class AnimeRepositoryTest {
 
         Assertions.assertThat(animeUpdated).isNotNull();
 
-        Assertions.assertThat(animeUpdated.getId()).isNotNull();
+        Assertions.assertThat(animeUpdated.getId()).isNotNull()
+                .isEqualTo(animeSaved.getId());
 
         Assertions.assertThat(animeUpdated.getName()).isEqualTo(animeSaved.getName());
 
-        Assertions.assertThat(animeUpdated.getId()).isEqualTo(animeSaved.getId());
 
     }
 
@@ -78,9 +78,8 @@ class AnimeRepositoryTest {
 
         List<Anime> animes = this.animeRepository.findByName(name);
 
-        Assertions.assertThat(animes).isNotEmpty();
-
-        Assertions.assertThat(animes).contains(animeSaved);
+        Assertions.assertThat(animes).isNotEmpty()
+                .contains(animeSaved);
     }
 
 
